@@ -1,0 +1,84 @@
+<template>
+  <div class="container">
+    <el-container style="height: 100%">
+      <el-aside width="200px">
+        <el-menu
+          style="height:100%;text-align:left"
+          default-active="1"
+          class="el-menu-vertical-demo"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          router
+
+        >
+          <el-menu-item index="home">
+            <i class="el-icon-menu"></i>
+            <span slot="title">home</span>
+          </el-menu-item>
+          <el-menu-item v-for="(item,index) in arr" :key="index" :index="item.path">
+            <i class="el-icon-setting"></i>
+            <span slot="title">{{item.name}}</span>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      arr: [
+        {
+          path: 'slot',
+          name: '插槽'
+        },
+        {
+          path: 'countDown',
+          name: '倒计时'
+        },
+        {
+          path: 'treeSelect',
+          name: '树状图select组合'
+        }
+      ]
+    }
+  },
+  methods: {}
+}
+</script>
+
+<style scoped lang="less">
+.container {
+  height: 100%;
+}
+
+.el-header,
+.el-footer {
+  background-color: #b3c0d1;
+  color: #333;
+  text-align: center;
+}
+
+.el-aside {
+  background-color: #d3dce6;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
+
+.el-main {
+  background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+</style>
