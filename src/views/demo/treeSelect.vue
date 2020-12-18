@@ -27,10 +27,71 @@
 export default {
   data () {
     return {
-      setkey: [1], // 展开节点
+      setkey: [1], // 默认展开节点
       dateList: [], // 遍历用
       SelectedArray: [12, 13], // 选中的数组
-      dataList: [], // tree数据
+      dataList: [
+        {
+          id: 1,
+          name: '总公司',
+          parent_id: null,
+          parent_name: null,
+          has_children: true,
+          children: [
+            {
+              id: 2,
+              name: '1xxxx部门',
+              parent_id: 1,
+              parent_name: '总公司',
+              has_children: true,
+              children: [
+                {
+                  id: 12,
+                  name: 'x1x项目',
+                  parent_id: 1,
+                  parent_name: '1xxxx部门',
+                  has_children: false,
+                  children: []
+                },
+                {
+                  id: 13,
+                  name: 'x22222x项目',
+                  parent_id: 2,
+                  parent_name: '1xxxx部门',
+                  has_children: true,
+                  children: [
+                    {
+                      id: 19,
+                      name: 'xxx',
+                      parent_id: 13,
+                      parent_name: 'x22222x项目',
+                      has_children: false,
+                      children: []
+                    }
+                  ]
+                }
+
+              ]
+            },
+            {
+              id: 15,
+              name: '管理办公室',
+              parent_id: 1,
+              parent_name: '总公司',
+              has_children: false,
+              children: []
+            },
+            {
+              id: 16,
+              name: '技术中心',
+              parent_id: 1,
+              parent_name: '总公司',
+              has_children: false,
+              children: []
+            }
+          ]
+        }
+      ], // tree数据
       value1: [], // select绑定的值
       // 对应的字段
       defaultProps: {
@@ -66,12 +127,12 @@ export default {
       }
       console.log(setkey)
       this.setkey = setkey
+      // 重新 设置tree
       this.$refs.tree.setCheckedKeys(this.setkey)
     },
     // 点击复选框触发
     checkClick (checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys) {
       //   console.log(checkedNodes, checkedKeys, halfCheckedNodes, halfCheckedKeys)
-      //   this.value1.push(checkedNodes.name)
       //   点击了复选框 使用this.$refs.tree.getCheckedNodes获取当前选中的节点
       const res = this.$refs.tree.getCheckedNodes(false, true) // 这里两个true，1. 是否只是叶子节点 2. 是否包含半选节点（就是使得选择的时候不包含父节点）
       console.log('点击树形图获取当前选中的节点', res)
@@ -90,11 +151,11 @@ export default {
     }
   },
   created () {
-    this.getTreeData()
+    // this.getTreeData()
   },
   // 默认选中
   mounted () {
-    this.$refs.tree.setCheckedKeys([1])
+    this.$refs.tree.setCheckedKeys(this.setkey)
   }
 }
 </script>
