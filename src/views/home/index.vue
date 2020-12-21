@@ -45,6 +45,10 @@ export default {
         {
           path: 'treeSelect',
           name: '树状图select组合'
+        },
+        {
+          path: 'textMock',
+          name: '使用mock'
         }
       ]
     }

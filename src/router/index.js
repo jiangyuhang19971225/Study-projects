@@ -33,6 +33,13 @@ const routes = [
         path: '/treeSelect',
         name: 'treeSelect',
         component: () => import('@/views/demo/treeSelect.vue')
+      },
+      // 使用mock
+      {
+
+        path: '/textMock',
+        name: 'textMock',
+        component: () => import('@/views/demo/textMock.vue')
       }
     ]
   }

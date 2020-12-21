@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import moment from 'moment'
 export default {
   name: 'countDown',
@@ -67,16 +66,16 @@ export default {
     this.getDjs()
     this.timer1 = setInterval(() => {
       this.getDjs()
-    })
+    }, 1000)
   },
   beforeDestroy () {
     clearInterval(this.timer)
     clearInterval(this.timer1)
-  },
-  async created () {
-    const data = await axios.get('/api/monitoring_data/')
-    console.log('数据', data)
   }
+  // async created () {
+  //   const data = await axios.get('/api/monitoring_data/')
+  //   console.log('数据', data)
+  // }
 }
 </script>
 

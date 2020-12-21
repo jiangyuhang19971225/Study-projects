@@ -105,7 +105,7 @@ export default {
       try {
         const {
           data: { data }
-        } = await this.$http.get('http://localhost:8848/treeData')
+        } = await this.$http.get('http://mockjs')
         console.log(data)
         this.dataList = data.data_list
         console.log(this.dataList)
