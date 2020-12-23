@@ -40,6 +40,28 @@ const routes = [
         path: '/textMock',
         name: 'textMock',
         component: () => import('@/views/demo/textMock.vue')
+      },
+      // 练习使用keepAlive
+      {
+
+        path: '/keepalive',
+        name: 'keepalive',
+        component: () => import('@/views/demo/testKeepAlive.vue'),
+        meta: {
+          keepAlive: true,
+          title: '测试使用actived生命周期'
+        }
+      },
+      // 使用自定义指令测试权限
+      {
+
+        path: '/udi',
+        name: 'udi',
+        component: () => import('@/views/demo/udi.vue'),
+        meta: {
+          keepAlive: false,
+          title: '使用自定义指令实现表格操作的权限demo'
+        }
       }
     ]
   }

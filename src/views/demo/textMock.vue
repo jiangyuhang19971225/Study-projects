@@ -1,21 +1,25 @@
 <template>
   <div>
     get
-<span v-for="item in data" :key="item.id">
-  {{item}} <br>
+    <span v-for="item in data" :key="item.id">
+  {{ item }} <br>
 </span>
-post
+    post
+    <hr>
+    <p> {{ time }} </p>
   </div>
 </template>
 
 <script>
+import dayjs from 'dayjs'
 
 export default {
   name: 'textMock',
 
   data () {
     return {
-      data: []
+      data: [],
+      time: null
     }
   },
   methods: {
@@ -34,6 +38,8 @@ export default {
     this.getData()
     this.postData()
     // alert('1')
+    this.time = dayjs().format()
+    console.log(dayjs(1318781876406))
   }
 
 }
