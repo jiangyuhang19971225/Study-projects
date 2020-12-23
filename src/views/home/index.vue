@@ -62,6 +62,10 @@ export default {
         {
           path: '/udi',
           name: '自定义指令'
+        },
+        {
+          path: '/vuex',
+          name: 'vuex语法糖的使用'
         }
       ]
     }

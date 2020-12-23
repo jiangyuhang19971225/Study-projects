@@ -62,6 +62,17 @@ const routes = [
           keepAlive: false,
           title: '使用自定义指令实现表格操作的权限demo'
         }
+      },
+      // vuex语法糖
+      {
+
+        path: '/vuex',
+        name: 'vuex',
+        component: () => import('@/views/demo/vuexFunction.vue'),
+        meta: {
+          keepAlive: false,
+          title: ' vuex语法糖的使用'
+        }
       }
     ]
   }
