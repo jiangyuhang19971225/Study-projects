@@ -61,3 +61,14 @@ const loginData = function (req) {
 }
 
 Mock.mock('/api/news/login', 'post', loginData)
+Mock.mock('/select', 'get', {
+  status: 200,
+  message: '获取数据成功',
+  'data|3': [
+    {
+      'id|+1': 0,
+      label: '@ctitle',
+      value: '@ctitle'
+    }
+  ]
+})

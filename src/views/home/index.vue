@@ -66,6 +66,19 @@ export default {
         {
           path: '/vuex',
           name: 'vuex语法糖的使用'
+        },
+        {
+          path: '/dynamicForm',
+          name: '测试动态表单'
+        },
+        {
+          path: '/OwndynamicForm',
+          name: '自己写动态表单'
+        },
+
+        {
+          path: '/collapse',
+          name: '折叠面板点击请求数据'
         }
       ]
     }

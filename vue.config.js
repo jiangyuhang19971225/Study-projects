@@ -1,7 +1,7 @@
 module.exports = {
   devServer: {
     // host: 'localhost',
-    // port: '8848',
+    port: '8848',
     open: true
 
     // proxy: { // 配置跨域

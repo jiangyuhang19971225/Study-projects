@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <p>时间: {{date}} </p>
-    <p>距离2020元旦:{{timeList[0]}} </p>
+    <p>距离2021元旦:{{timeList[0]}} </p>
     <p>距离2020春节: {{timeList[1]}} </p>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
       timer: null,
       timer1: null,
       endTime: [
-        { time: '2021-01-01 00:00:00' },
+        { time: '2022-01-01 00:00:00' },
         { time: '2021-02-12 00:00:00' }
       ],
       timeList: []
@@ -34,12 +34,12 @@ export default {
         // console.log(moment(this.endTime[i].time).format('X'));//获取指定时间的时间戳
         // console.log(moment(this.endTime[i].time).format('X') - moment().format('X'));//获取时间戳的差值
         const timeVal = moment(this.endTime[i].time).format('X') - moment().format('X')
-        console.log('插值时间戳', timeVal)
+        // console.log('插值时间戳', timeVal)
         const hours = Math.floor(timeVal / (3600))// 小时
         const minute = Math.floor((timeVal - 3600 * hours) / 60)
         const second = Math.floor((timeVal - 3600 * hours - 60 * minute))
 
-        console.log('小时', hours, '分钟', minute, '秒', second)
+        // console.log('小时', hours, '分钟', minute, '秒', second)
         // 时间戳转换
         var d = Math.floor(timeVal / (24 * 3600))
         var h = Math.floor((timeVal - 24 * 3600 * d) / 3600)
@@ -56,7 +56,8 @@ export default {
     }
   },
   mounted () {
-    console.log('时间戳', moment().format('X'))
+    // console.log('111', moment('20220101').format('YYYY-MM-DD'))
+    // console.log('时间戳', moment().format('X'))
     // 现在时间
     this.countDate()
     this.timer = setInterval(() => {

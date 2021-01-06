@@ -73,6 +73,37 @@ const routes = [
           keepAlive: false,
           title: ' vuex语法糖的使用'
         }
+      },
+      {
+
+        path: '/dynamicForm',
+        name: 'dynamicForm',
+        component: () => import('@/views/demo/dynamicForm.vue'),
+        meta: {
+          keepAlive: false,
+          title: ' 测试动态表单 form-create'
+        }
+      },
+      // 自己写动态表单
+      {
+
+        path: '/OwndynamicForm',
+        name: 'OwndynamicForm',
+        component: () => import('@/views/demo/OwndynamicForm.vue'),
+        meta: {
+          keepAlive: false,
+          title: ' 自己写动态表单'
+        }
+      },
+      {
+
+        path: '/collapse',
+        name: 'collapse',
+        component: () => import('@/views/demo/collapse.vue'),
+        meta: {
+          keepAlive: false,
+          title: ' 折叠面板点击动态加载'
+        }
       }
     ]
   }
