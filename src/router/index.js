@@ -104,6 +104,16 @@ const routes = [
           keepAlive: false,
           title: ' 折叠面板点击动态加载'
         }
+      },
+      {
+
+        path: '/form',
+        name: 'form',
+        component: () => import('@/views/demo/form.vue'),
+        meta: {
+          keepAlive: false,
+          title: ' form'
+        }
       }
     ]
   }

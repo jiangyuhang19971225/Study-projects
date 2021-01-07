@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-dynamic">
+    <el-form :model="ruleForm" ref="ruleForm" label-width="120px" class="demo-dynamic">
       <el-form-item prop="name" :label="label" :rules="rule">
-        <el-input placeholder="请输入内容" v-model="ruleForm.name" :type="type"></el-input>
+        <el-input placeholder="请输入内容" v-model="ruleForm.name" :type="type" style="width:60%"></el-input>
       </el-form-item>
     </el-form>
   </div>
@@ -49,7 +49,7 @@ export default {
     '$store.state.value'(curVal, oldVal) {
       console.log(curVal, oldVal)
       if (curVal) {
-        console.log(this.$refs.submit)
+        // console.log(this.$refs.submit)
         // this.$refs.submit.click()
         this.submitForm()
       }

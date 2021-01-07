@@ -39,7 +39,7 @@ export default {
         const minute = Math.floor((timeVal - 3600 * hours) / 60)
         const second = Math.floor((timeVal - 3600 * hours - 60 * minute))
 
-        // console.log('小时', hours, '分钟', minute, '秒', second)
+        console.log('小时', hours, '分钟', minute, '秒', second)
         // 时间戳转换
         var d = Math.floor(timeVal / (24 * 3600))
         var h = Math.floor((timeVal - 24 * 3600 * d) / 3600)
@@ -56,7 +56,9 @@ export default {
     }
   },
   mounted () {
-    // console.log('111', moment('20220101').format('YYYY-MM-DD'))
+    const date = moment('20220101').format('YYYY-MM-DD')
+    console.log('date', date)
+    // console.log( moment('20220101').format('YYYY-MM-DD'))
     // console.log('时间戳', moment().format('X'))
     // 现在时间
     this.countDate()

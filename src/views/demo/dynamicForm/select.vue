@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <el-form :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-dynamic">
-      <el-col :span="11">
-        <el-form-item prop="region" :label="label" :rules="rule">
-          <el-select v-model="ruleForm.region" placeholder="请选择区域">
-            <el-option :label="item.label" :value="item.value" v-for="item in option" :key="item.id"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-col>
+  <div class="main">
+    <el-form :model="ruleForm" ref="ruleForm" label-width="120px" class="demo-dynamic">
+      <el-form-item prop="region" :label="label" :rules="rule" >
+        <el-select v-model="ruleForm.region" placeholder="请选择区域" >
+          <el-option :label="item.label" :value="item.value" v-for="item in option" :key="item.id" ></el-option>
+        </el-select>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -88,4 +86,6 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

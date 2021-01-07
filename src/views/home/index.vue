@@ -79,6 +79,10 @@ export default {
         {
           path: '/collapse',
           name: '折叠面板点击请求数据'
+        },
+        {
+          path: '/form',
+          name: 'form'
         }
       ]
     }
@@ -96,20 +100,20 @@ export default {
 .el-footer {
   background-color: #b3c0d1;
   color: #333;
-  text-align: center;
+  // text-align: center;
 }
 
 .el-aside {
   background-color: #d3dce6;
   color: #333;
-  text-align: center;
+  // text-align: center;
   line-height: 200px;
 }
 
 .el-main {
   background-color: #e9eef3;
   color: #333;
-  text-align: center;
+  // text-align: center;
 }
 
 body > .el-container {
