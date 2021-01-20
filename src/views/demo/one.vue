@@ -1,0 +1,151 @@
+<template>
+  <div class="container">
+    one
+    <el-upload
+      class="upload-demo"
+      action
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
+      multiple
+      :limit="3"
+      :on-exceed="handleExceed"
+      :on-change="change"
+      :file-list="fileList"
+      :http-request="request"
+    >
+      <el-button size="small" type="primary">点击上传</el-button>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+<multipane style="height:100px;background:red">
+  <div>Pane 1</div>
+  <multipane-resizer ></multipane-resizer>
+  <div>Pane 2</div>
+  <multipane-resizer></multipane-resizer>
+  <div>Pane 3</div>
+</multipane>
+
+  </div>
+</template>
+
+<script>
+import { Multipane, MultipaneResizer } from 'vue-multipane'
+
+import axios from 'axios'
+import XLSX from 'xlsx'
+export default {
+  // ...
+  components: {
+    Multipane,
+    MultipaneResizer
+  },
+  data() {
+    return {
+      fileList: [
+        {
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        },
+        {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }
+      ]
+    }
+  },
+  methods: {
+    handleRemove(file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePreview(file) {
+      console.log(file)
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`)
+    },
+    change(file, fileList) {
+      console.log(file, file.raw, fileList)
+      var formData = new FormData()
+      formData.append('file', file.raw)
+      // var bytesPerPiece = 1024 * 1024 * 0.01// 每个文件切片大小定为1MB .
+      // var totalPieces
+      // var blob = document.getElementById('file').files[0]
+      // var start = 0
+      // var end
+      // var index = 0
+      // var filesize = blob.size
+      // var filename = blob.name
+
+      // // 计算文件切片总数
+      // totalPieces = Math.ceil(filesize / bytesPerPiece)
+      // while (start < filesize) {
+      //   end = start + bytesPerPiece
+      //   if (end > filesize) {
+      //     end = filesize
+      //   }
+
+      //   var chunk = blob.slice(start, end)// 切割文件
+      //   var sliceIndex = blob.name + index
+      //   var formData = new FormData()
+      //   formData.append('file', chunk, filename)
+      //   console.log(formData)
+      // }
+      // 拿到所导入文件的名字
+      // const fileName = file.name
+      // console.log('fileName', fileName)
+      // // 定义reader，存放文件读取方法
+      // const reader = new FileReader()
+      // // 启动函数
+      // reader.readAsBinaryString(file.raw)
+      // var that = this
+      // // onload在文件被读取时自动触发
+      // reader.onload = function(e) {
+      //   // workbook存放excel的所有基本信息
+      //   const workbook = XLSX.read(e.target.result, { type: 'binary' })
+      //   console.log(workbook)
+      //   const json = workbook.Strings
+      //   console.log('json', json, json.length / 2, json.slice(0, json.length / 2), json.slice(json.length / 2))
+      //   var arr = []
+      //   arr.push(json.slice(0, json.length / 2))
+      //   arr.push(json.slice(json.length / 2))
+      //   // console.log(arr, JSON.parse(arr))
+      //   // that.$store.commit('addArr', arr)
+      //   // var form = new FormData()
+      //   // form.append('file', arr)
+      // }
+      // axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8' // post json
+      // axios
+      //   .post('http://172.21.139.80:8000/yangjiapu/', {
+      //     headers: {
+      //       'Content-Type': 'application/json;charset=UTF-8'
+      //     },
+      //     formData
+      //   }
+      //   )
+      //   .then(res => console.log(res))
+      axios({
+        method: 'post',
+        url: 'http://172.21.139.80:8000/yangjiapu1/',
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8'
+        },
+        data: formData
+      })
+        .then(res => console.log(res))
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    request() {
+      // axios.post('https://jsonplaceholder.typicode.com/posts/', form
+      // ).then(res =>
+      //   console.log(res))
+    }
+  }
+}
+</script>
+
+<style scoped></style>
