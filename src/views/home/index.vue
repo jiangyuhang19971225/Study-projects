@@ -82,6 +82,10 @@ export default {
         {
           path: '/form',
           name: 'form'
+        },
+        {
+          path: '/vis',
+          name: 'vis'
         }
       ]
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img :src="require('../../../static/svg/cc-activeMQ.svg')" alt="">
+    <img src="/static/svg/cc-activeMQ.svg" alt="">
     {{ $route.meta.title }}
     <div class="demo"></div>
   </div>
@@ -31,7 +31,7 @@ export default {
         { id: 1369, label: '13691' },
         { id: 3247, label: '32471' },
         { id: 3429, label: '32491' },
-        { id: 5560, label: '5560', image: require('../../../static/svg/cc-activeMQ.svg'), shape: 'image' },
+        // { id: 5560, label: '5560', image: require('../../../static/svg/cc-activeMQ.svg'), shape: 'image' },
         { id: 6163, label: '6163' },
         { id: 7404, label: '7404' },
         { id: 7909, label: '7909' }

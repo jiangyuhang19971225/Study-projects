@@ -25,10 +25,16 @@
   <div>Pane 3</div>
 </multipane>
 
+<div>
+  <h1>echarts</h1>
+  <div id="echarts" style="width:600px;height:400px"></div>
+</div>
+
   </div>
 </template>
 
 <script>
+import * as echarts from 'echarts'
 import { Multipane, MultipaneResizer } from 'vue-multipane'
 
 import axios from 'axios'
@@ -54,6 +60,74 @@ export default {
     }
   },
   methods: {
+    echartsInit() {
+      const app = document.getElementById('echarts')
+      var myChart = echarts.init(app)
+      const option = {
+        title: {
+          text: '饼图程序调用高亮示例',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        },
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: [
+              { value: 335, name: '直接访问' },
+              { value: 310, name: '邮件营销' },
+              { value: 234, name: '联盟广告' },
+              { value: 135, name: '视频广告' },
+              { value: 1548, name: '搜索引擎' }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 40,
+                shadowOffsetX: 1,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
+      myChart.setOption(option)
+      app.currentIndex = -1
+
+      setInterval(function () {
+        // 获取数据的长度
+        var dataLen = option.series[0].data.length
+        // 取消之前高亮的图形
+        myChart.dispatchAction({
+          type: 'downplay',
+          seriesIndex: 0,
+          dataIndex: app.currentIndex
+        })
+        app.currentIndex = (app.currentIndex + 1) % dataLen
+        console.log('app.currentIndex', app.currentIndex, (app.currentIndex + 1) % dataLen)
+        // 高亮当前图形
+        myChart.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 0,
+          dataIndex: app.currentIndex
+        })
+        // 显示 tooltip
+        myChart.dispatchAction({
+          type: 'showTip',
+          seriesIndex: 0,
+          dataIndex: app.currentIndex
+        })
+      }, 1000)
+    },
     handleRemove(file, fileList) {
       console.log(file, fileList)
     },
@@ -69,7 +143,9 @@ export default {
     change(file, fileList) {
       console.log(file, file.raw, fileList)
       var formData = new FormData()
-      formData.append('file', file.raw)
+      // formData.append('file', file.raw)
+      const arr = ['admin', 'role']
+      formData.append('arr', arr)
       // var bytesPerPiece = 1024 * 1024 * 0.01// 每个文件切片大小定为1MB .
       // var totalPieces
       // var blob = document.getElementById('file').files[0]
@@ -128,9 +204,9 @@ export default {
       //   .then(res => console.log(res))
       axios({
         method: 'post',
-        url: 'http://172.21.139.80:8000/yangjiapu1/',
+        url: 'https://jsonplaceholder.typicode.com/posts/',
         headers: {
-          'Content-type': 'application/json;charset=UTF-8'
+          'Content-type': 'multipart/form-data'
         },
         data: formData
       })
@@ -144,6 +220,9 @@ export default {
       // ).then(res =>
       //   console.log(res))
     }
+  },
+  mounted() {
+    this.echartsInit()
   }
 }
 </script>

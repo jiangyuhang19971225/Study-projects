@@ -1,4 +1,19 @@
+// const CopyWebpackPlugin = require('copy-webpack-plugin') // 引入插件
 module.exports = {
+  // configureWebpack: {
+  //   plugins: [
+  //     new CopyWebpackPlugin({
+  //       patterns: [{
+  //         from: './static',
+  //         to: 'static'
+  //       }]
+  //     })
+  //   ]
+  // },
+  lintOnSave: false,
+  publicPath: './',
+  outputDir: 'dist',
+  assetsDir: 'static',
   devServer: {
     // host: 'localhost',
     port: '8099',

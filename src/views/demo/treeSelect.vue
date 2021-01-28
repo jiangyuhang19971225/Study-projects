@@ -97,7 +97,8 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'name'
-      }
+      },
+      fatherNode
     }
   },
   methods: {
