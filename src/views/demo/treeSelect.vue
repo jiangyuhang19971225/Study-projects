@@ -97,8 +97,7 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'name'
-      },
-      fatherNode
+      }
     }
   },
   methods: {
@@ -152,7 +151,7 @@ export default {
     }
   },
   created () {
-    // this.getTreeData()
+    this.getTreeData()
   },
   // 默认选中
   mounted () {

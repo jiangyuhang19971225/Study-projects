@@ -135,6 +135,12 @@ const routes = [
           title: ' 拓扑图'
         }
 
+      },
+      // this.set
+      {
+        path:'/set',
+        name:'set',
+        component:()=>import('@/views/demo/set.vue')
       }
     ]
   }

@@ -86,7 +86,11 @@ export default {
         {
           path: '/vis',
           name: 'vis'
+        },{
+          path: '/set',
+          name: 'this.set'
         }
+
       ]
     }
   },

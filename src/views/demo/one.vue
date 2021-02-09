@@ -1,6 +1,32 @@
 <template>
   <div class="container">
+    <el-dropdown split-button type="primary" @click="handleClick">
+  更多菜单
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+    <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+    <div style="margin: 15px 0;"></div>
+    <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+      <el-checkbox v-for="city in cities" :label="city" :key="city">{{ city }}</el-checkbox>
+    </el-checkbox-group>
     one
+    <el-tree
+      ref="tree"
+      :data="data"
+      check-strictly
+      show-checkbox
+      node-key="id"
+
+      :default-checked-keys='["1-True","1-False"]'
+      :props="defaultProps"
+    >
+    </el-tree>
     <el-upload
       class="upload-demo"
       action
@@ -17,19 +43,18 @@
       <el-button size="small" type="primary">点击上传</el-button>
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
     </el-upload>
-<multipane style="height:100px;background:red">
-  <div>Pane 1</div>
-  <multipane-resizer ></multipane-resizer>
-  <div>Pane 2</div>
-  <multipane-resizer></multipane-resizer>
-  <div>Pane 3</div>
-</multipane>
+    <multipane style="height:100px;background:red">
+      <div>Pane 1</div>
+      <multipane-resizer></multipane-resizer>
+      <div>Pane 2</div>
+      <multipane-resizer></multipane-resizer>
+      <div>Pane 3</div>
+    </multipane>
 
-<div>
-  <h1>echarts</h1>
-  <div id="echarts" style="width:600px;height:400px"></div>
-</div>
-
+    <div>
+      <h1>echarts</h1>
+      <div id="echarts" style="width:600px;height:400px"></div>
+    </div>
   </div>
 </template>
 
@@ -39,14 +64,397 @@ import { Multipane, MultipaneResizer } from 'vue-multipane'
 
 import axios from 'axios'
 import XLSX from 'xlsx'
+const cityOptions = ['上海', '北京', '广州', '深圳']
 export default {
   // ...
   components: {
     Multipane,
     MultipaneResizer
   },
+
   data() {
     return {
+      aa: [],
+      data: [
+        {
+          id: '1-False',
+          parent_id: null,
+          has_children: true,
+          name: '总公司',
+          is_user: false,
+          children: [
+            {
+              id: '2-False',
+              parent_id: 1,
+              has_children: true,
+              name: '技术事业群',
+              is_user: false,
+              children: [
+                {
+                  id: '12-False',
+                  parent_id: 2,
+                  has_children: false,
+                  name: '管理线',
+                  is_user: false,
+                  children: [],
+                  users_num: 0
+                },
+                {
+                  id: '13-False',
+                  parent_id: 2,
+                  has_children: true,
+                  name: '平台技术中心',
+                  is_user: false,
+                  children: [
+                    {
+                      id: '19-False',
+                      parent_id: 13,
+                      has_children: false,
+                      name: '平台开发部',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    },
+                    {
+                      id: '20-False',
+                      parent_id: 13,
+                      has_children: false,
+                      name: '应用开发部',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    },
+                    {
+                      id: '21-False',
+                      parent_id: 13,
+                      has_children: false,
+                      name: '应用管理部',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    },
+                    {
+                      id: '22-False',
+                      parent_id: 13,
+                      has_children: false,
+                      name: '数据平台部',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    },
+                    {
+                      id: '23-False',
+                      parent_id: 13,
+                      has_children: false,
+                      name: '央视新闻项目组',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    },
+                    {
+                      id: '24-False',
+                      parent_id: 13,
+                      has_children: false,
+                      name: '管理线',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    }
+                  ],
+                  users_num: 0
+                },
+                {
+                  id: '14-False',
+                  parent_id: 2,
+                  has_children: true,
+                  name: '技术运维中心',
+                  is_user: false,
+                  children: [
+                    {
+                      id: '25-False',
+                      parent_id: 14,
+                      has_children: false,
+                      name: '系统运维部',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    },
+                    {
+                      id: '26-False',
+                      parent_id: 14,
+                      has_children: true,
+                      name: '平台运维部',
+                      is_user: false,
+                      children: [
+                        {
+                          id: '2-True',
+                          name: 'yanziyu(闫子煜)',
+                          is_user: true,
+                          has_children: false
+                        },
+                        {
+                          id: '13-True',
+                          name: 'yanziyu01(yanziyu)',
+                          is_user: true,
+                          has_children: false
+                        },
+                        {
+                          id: '16-True',
+                          name: 'songmingzhou(宋明周)',
+                          is_user: true,
+                          has_children: false
+                        }
+                      ],
+                      users_num: 3
+                    },
+                    {
+                      id: '27-False',
+                      parent_id: 14,
+                      has_children: false,
+                      name: '网络安全部',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    },
+                    {
+                      id: '28-False',
+                      parent_id: 14,
+                      has_children: false,
+                      name: '基础设施部',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    },
+                    {
+                      id: '29-False',
+                      parent_id: 14,
+                      has_children: false,
+                      name: '管理线',
+                      is_user: false,
+                      children: [],
+                      users_num: 0
+                    }
+                  ],
+                  users_num: 0
+                },
+                {
+                  id: '15-False',
+                  parent_id: 2,
+                  has_children: false,
+                  name: '技术管理办公室',
+                  is_user: false,
+                  children: [],
+                  users_num: 0
+                },
+                {
+                  id: '16-False',
+                  parent_id: 2,
+                  has_children: false,
+                  name: '视频技术中心',
+                  is_user: false,
+                  children: [],
+                  users_num: 0
+                },
+                {
+                  id: '17-False',
+                  parent_id: 2,
+                  has_children: false,
+                  name: '用户数据运营中心',
+                  is_user: false,
+                  children: [],
+                  users_num: 0
+                },
+                {
+                  id: '18-False',
+                  parent_id: 2,
+                  has_children: false,
+                  name: '多媒体制作部',
+                  is_user: false,
+                  children: [],
+                  users_num: 0
+                }
+              ],
+              users_num: 0
+            },
+            {
+              id: '3-False',
+              parent_id: 1,
+              has_children: false,
+              name: '合作单位',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '4-False',
+              parent_id: 1,
+              has_children: false,
+              name: '新媒体创新孵化中心',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '5-False',
+              parent_id: 1,
+              has_children: false,
+              name: '易橙天下',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '6-False',
+              parent_id: 1,
+              has_children: false,
+              name: '项目办公室',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '7-False',
+              parent_id: 1,
+              has_children: false,
+              name: '品牌部',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '8-False',
+              parent_id: 1,
+              has_children: false,
+              name: '央视影音事业群',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '9-False',
+              parent_id: 1,
+              has_children: false,
+              name: '分子公司',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '10-False',
+              parent_id: 1,
+              has_children: false,
+              name: '总编室',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '11-False',
+              parent_id: 1,
+              has_children: false,
+              name: '海洋经济办公室',
+              is_user: false,
+              children: [],
+              users_num: 0
+            },
+            {
+              id: '1-True',
+              name: 'admin(admin)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '3-True',
+              name: 'chenchen(陈辰)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '4-True',
+              name: 'guojipeng(郭继鹏)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '5-True',
+              name: 'yangjiapu(杨家璞)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '6-True',
+              name: 'jiangyuhang(蒋宇航)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '7-True',
+              name: 'caienjun(蔡恩骏)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '8-True',
+              name: 'yangyong(杨永)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '9-True',
+              name: 'zhangliang(张亮)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '10-True',
+              name: 'renjinyue(renjinyue)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '11-True',
+              name: 'testuser(测试专用)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '12-True',
+              name: 'canway(嘉为)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '14-True',
+              name: 'duoronghua(多荣华)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '15-True',
+              name: '18911853349(陈辰)',
+              is_user: true,
+              has_children: false
+            },
+            {
+              id: '17-True',
+              name: 'hanshiqin(hanshiqin)',
+              is_user: true,
+              has_children: false
+            }
+          ],
+          users_num: 14
+        }
+      ],
+
+      defaultProps: {
+        children: 'children',
+        label: 'name'
+      },
+
+      checkAll: false,
+      checkedCities: ['上海', '北京'],
+      cities: cityOptions,
+      isIndeterminate: true,
       fileList: [
         {
           name: 'food.jpeg',
@@ -60,6 +468,16 @@ export default {
     }
   },
   methods: {
+    handleCheckAllChange(val) {
+      this.checkedCities = val ? cityOptions : []
+      this.isIndeterminate = false
+    },
+    handleCheckedCitiesChange(value) {
+      console.log(this.checkedCities, this.cities)
+      const checkedCount = value.length
+      this.checkAll = checkedCount === this.cities.length
+      this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length
+    },
     echartsInit() {
       const app = document.getElementById('echarts')
       var myChart = echarts.init(app)
@@ -103,7 +521,7 @@ export default {
       myChart.setOption(option)
       app.currentIndex = -1
 
-      setInterval(function () {
+      setInterval(function() {
         // 获取数据的长度
         var dataLen = option.series[0].data.length
         // 取消之前高亮的图形
@@ -113,7 +531,7 @@ export default {
           dataIndex: app.currentIndex
         })
         app.currentIndex = (app.currentIndex + 1) % dataLen
-        console.log('app.currentIndex', app.currentIndex, (app.currentIndex + 1) % dataLen)
+        // console.log('app.currentIndex', app.currentIndex, (app.currentIndex + 1) % dataLen)
         // 高亮当前图形
         myChart.dispatchAction({
           type: 'highlight',
@@ -223,6 +641,10 @@ export default {
   },
   mounted() {
     this.echartsInit()
+    setTimeout(() => {
+      // this.$refs.tree.setCheckedKeys([15])
+    }, 2000)
+    this.aa = ['1-True', '1-False']
   }
 }
 </script>
