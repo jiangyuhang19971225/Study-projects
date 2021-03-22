@@ -5,7 +5,7 @@
       <div style="background-color: antiquewhite;margin:0 auto" >
         <header>匿名插槽头部</header>
         <children>
-          我是在父组件里面调用组件直接填入的数据
+          我是在父组件里面调用组件直接填入的数据 使用slot占用位置
         </children>
       </div>
       <div style="background: #42b983">

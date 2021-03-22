@@ -1,31 +1,52 @@
 <template>
   <div class="container">
-    <el-dropdown split-button type="primary" @click="handleClick">
-  更多菜单
-  <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
-    <el-dropdown-item>狮子头</el-dropdown-item>
-    <el-dropdown-item>螺蛳粉</el-dropdown-item>
-    <el-dropdown-item>双皮奶</el-dropdown-item>
-    <el-dropdown-item>蚵仔煎</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
+    <video style="width:90%" controls :src="src">
+      <!-- <source /> -->
+    </video>
+    <!-- // 使video支持ios的AirPlay功能，需要终端支持 -->
+    <video
+      class="ppq-video video-hidden"
+      :src="src"
+      webkit-playsinline="true"
+      playsinline="true"
+      x-webkit-airplay="allow"
+      x5-playsinline
+      controls
+    ></video>
+     <!-- poster="https://img02.sogoucdn.com/app/a/200692/42345752787911E8BB8FD89EF30F789D?m-wh=960*540" -->
+<!--  -->
+    二维码
+    <img
+      style="width:150px;height:150px"
+      src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGa7zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAySW81UXBOUzRmYkMxZHNwSk53Y1UAAgRU0i1gAwQIBwAA"
+      alt=""
+    />
+    <!-- <images  style="width:100px;height:100px" img="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQGa7zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAySW81UXBOUzRmYkMxZHNwSk53Y1UAAgRU0i1gAwQIBwAA">
+
+    </images> -->
+    <div class="hello" v-on:click="hidePanel" style="width:200px;height:200px;background:green">
+      11111111111111
+      <br />
+      222222222222
+      <div id="myPanel" v-if="panelShow" style="width:100px;height:100px;background:red">3333333333</div>
+    </div>
+    <el-dropdown split-button type="primary">
+      更多菜单
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item>黄金糕</el-dropdown-item>
+        <el-dropdown-item>狮子头</el-dropdown-item>
+        <el-dropdown-item>螺蛳粉</el-dropdown-item>
+        <el-dropdown-item>双皮奶</el-dropdown-item>
+        <el-dropdown-item>蚵仔煎</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
     <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
     <div style="margin: 15px 0;"></div>
     <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
       <el-checkbox v-for="city in cities" :label="city" :key="city">{{ city }}</el-checkbox>
     </el-checkbox-group>
     one
-    <el-tree
-      ref="tree"
-      :data="data"
-      check-strictly
-      show-checkbox
-      node-key="id"
-
-      :default-checked-keys='["1-True","1-False"]'
-      :props="defaultProps"
-    >
+    <el-tree ref="tree" :data="data" check-strictly show-checkbox node-key="id" :default-checked-keys="['1-True', '1-False']" :props="defaultProps">
     </el-tree>
     <el-upload
       class="upload-demo"
@@ -74,6 +95,8 @@ export default {
 
   data() {
     return {
+      src: 'http://edge.ivideo.sina.com.cn/31360210703.mp4?KID=sina,viask&Expires=1613750400&ssig=UsdrAsQM%2B7&reqid=',
+      panelShow: true,
       aa: [],
       data: [
         {
@@ -468,6 +491,17 @@ export default {
     }
   },
   methods: {
+    hidePanel: function(event) {
+      var sp = document.getElementById('myPanel')
+
+      if (sp) {
+        console.log(sp.contains)
+        if (!sp.contains(event.target)) {
+          // 这句是说如果我们点击到了id为myPanel以外的区域
+          this.panelShow = false
+        }
+      }
+    },
     handleCheckAllChange(val) {
       this.checkedCities = val ? cityOptions : []
       this.isIndeterminate = false

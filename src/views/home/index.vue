@@ -86,15 +86,21 @@ export default {
         {
           path: '/vis',
           name: 'vis'
-        },{
+        }, {
           path: '/set',
           name: 'this.set'
+        },
+        {
+          path: '/clickBlankPage',
+          name: 'clickBlankPage'
         }
 
       ]
     }
   },
-  methods: {}
+  methods: {
+
+  }
 }
 </script>
 
@@ -118,6 +124,7 @@ export default {
   background-color: #e9eef3;
   color: #333;
   // text-align: center;
+  // height:100%
 }
 body > .el-container {
   margin-bottom: 40px;

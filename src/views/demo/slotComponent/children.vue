@@ -4,7 +4,6 @@
     <br />
     <!--    默认插槽-->
     <slot></slot>
-
     <!--      具名插槽-->
     <slot name="left"></slot>
     <slot name="right"></slot>

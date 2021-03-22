@@ -138,9 +138,14 @@ const routes = [
       },
       // this.set
       {
-        path:'/set',
-        name:'set',
-        component:()=>import('@/views/demo/set.vue')
+        path: '/set',
+        name: 'set',
+        component: () => import('@/views/demo/set.vue')
+      },
+      {
+        path: '/clickBlankPage',
+        name: 'clickBlankPage',
+        component: () => import('@/views/demo/clickBlankPage.vue')
       }
     ]
   }
